@@ -1,0 +1,32 @@
+[project]
+name = "english-learning-backend"
+version = "1.0.0"
+description = "English Learning App Backend API"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "huggingface-hub>=0.26.0",
+    "sqlalchemy>=2.0.36",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.6.0",
+    "python-multipart>=0.0.12",
+    "python-dotenv>=1.0.1",
+    "requests>=2.32.0",
+]
+
+[project.optional-dependencies]
+local = [
+    "transformers>=4.45.0",
+    "torch>=2.5.0",
+    "librosa>=0.10.2",
+    "soundfile>=0.12.1",
+]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "black>=24.10.0",
+    "isort>=5.13.0",
+    "ruff>=0.7.0",
+]

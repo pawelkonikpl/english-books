@@ -1,0 +1,89 @@
+# generated: 11-02-2025 17:58
+# project: bmad
+# project_key: bmad
+# tracking_system: file-system
+# story_location: {project-root}/docs/stories
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic exists in epic file but not contexted
+#   - contexted: Epic tech context created (required before drafting stories)
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - drafted: Story file created in stories folder
+#   - ready-for-dev: Draft approved and story context created
+#   - in-progress: Developer actively working on implementation
+#   - review: Under SM review (via code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - completed: Retrospective has been done
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epics should be 'contexted' before stories can be 'drafted'
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically drafts next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', SM reviews, then Dev moves to 'done'
+
+generated: 11-02-2025 17:58
+project: bmad
+project_key: bmad
+tracking_system: file-system
+story_location: "{project-root}/docs/stories"
+
+development_status:
+  # Epic 1: Book Library & Management
+  epic-1: contexted
+  1-1-library-screen-with-book-grid: drafted
+  1-2-book-detail-screen: backlog
+  1-3-freemium-model-implementation: backlog
+  1-4-book-progress-tracking: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: Reading Experience (Core Magic Moment)
+  epic-2: backlog
+  2-1-reading-view-component: backlog
+  2-2-audio-text-synchronization: backlog
+  2-3-reading-playback-controls: backlog
+  2-4-auto-resume-last-position: backlog
+  2-5-chapter-completion-celebration: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Instant Translation (Magic Moment)
+  epic-3: backlog
+  3-1-word-tap-detection: backlog
+  3-2-translation-popup-ui: backlog
+  3-3-ai-memory-technique-generation: backlog
+  3-4-translation-api-integration: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Vocabulary Building
+  epic-4: backlog
+  4-1-add-word-to-vocabulary: backlog
+  4-2-vocabulary-screen-with-word-list: backlog
+  4-3-flashcard-review-mode: backlog
+  4-4-vocabulary-progress-stats: backlog
+  4-5-spaced-repetition-algorithm: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Audio & Narration
+  epic-5: backlog
+  5-1-audio-player-component: backlog
+  5-2-playback-speed-control: backlog
+  5-3-background-audio-playback: backlog
+  5-4-audio-file-management: backlog
+  5-5-narrator-selection: backlog
+  epic-5-retrospective: optional
+
+  # Epic 6: Settings & Personalization
+  epic-6: backlog
+  6-1-reading-preferences: backlog
+  6-2-learning-preferences: backlog
+  6-3-account-premium-management: backlog
+  6-4-onboarding-flow: backlog
+  6-5-app-info-support: backlog
+  epic-6-retrospective: optional

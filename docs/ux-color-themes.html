@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning App - Color Theme Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .theme-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .theme-header {
+            padding: 24px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .theme-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .theme-personality {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .theme-description {
+            font-size: 13px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .color-palette {
+            padding: 24px;
+            background: #fafafa;
+        }
+
+        .palette-section {
+            margin-bottom: 20px;
+        }
+
+        .palette-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .palette-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .color-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch {
+            flex: 1;
+            min-width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-end;
+            padding: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .color-label {
+            font-size: 10px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.9);
+            padding: 4px 6px;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        .color-hex {
+            font-size: 9px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .components-demo {
+            padding: 24px;
+        }
+
+        .demo-section {
+            margin-bottom: 24px;
+        }
+
+        .demo-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .input-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .input-field {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .card-demo {
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-icon {
+            font-weight: 700;
+        }
+
+        .comparison-note {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 16px;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+
+        .comparison-note h3 {
+            color: #f57c00;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .comparison-note p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .themes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 English Learning App - Color Theme Explorer</h1>
+        <p>Explore 4 different theme directions for your interactive reading experience</p>
+    </div>
+
+    <!-- THEME 1: CALM FOCUS -->
+    <div class="themes-grid">
+        <div class="theme-card" style="--primary: #3B82F6; --secondary: #8B5CF6;">
+            <div class="theme-header">
+                <div class="theme-name" style="color: #3B82F6;">1. Calm Focus</div>
+                <div class="theme-personality">Professional • Trustworthy • Focused</div>
+                <div class="theme-description">Best for: Deep reading sessions, professional learners who value clarity and concentration</div>
+            </div>
+
+            <div class="color-palette">
+                <div class="palette-section">
+                    <div class="palette-label">Primary Colors</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #3B82F6;">
+                            <div class="color-label">Primary<br><span class="color-hex">#3B82F6</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #8B5CF6;">
+                            <div class="color-label">Secondary<br><span class="color-hex">#8B5CF6</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #06B6D4;">
+                            <div class="color-label">Accent<br><span class="color-hex">#06B6D4</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-section">
+                    <div class="palette-label">Semantic Colors</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #10B981;">
+                            <div class="color-label">Success<br><span class="color-hex">#10B981</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #F59E0B;">
+                            <div class="color-label">Warning<br><span class="color-hex">#F59E0B</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #EF4444;">
+                            <div class="color-label">Error<br><span class="color-hex">#EF4444</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-section">
+                    <div class="palette-label">Neutral Scale</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #F9FAFB;">
+                            <div class="color-label">BG<br><span class="color-hex">#F9FAFB</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #E5E7EB;">
+                            <div class="color-label">Border<br><span class="color-hex">#E5E7EB</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #6B7280;">
+                            <div class="color-label">Text Sec<br><span class="color-hex">#6B7280</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #1F2937;">
+                            <div class="color-label">Text<br><span class="color-hex">#1F2937</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="components-demo">
+                <div class="demo-section">
+                    <div class="demo-label">Buttons</div>
+                    <div class="button-group">
+                        <button class="btn" style="background: #3B82F6; color: white;">Start Reading</button>
+                        <button class="btn" style="background: white; color: #3B82F6; border: 2px solid #3B82F6;">Browse Books</button>
+                        <button class="btn" style="background: #E5E7EB; color: #6B7280;">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Input Field</div>
+                    <div class="input-demo">
+                        <input class="input-field" style="border-color: #E5E7EB;" type="text" placeholder="Search for books...">
+                        <input class="input-field" style="border-color: #3B82F6; background: #EFF6FF;" type="text" placeholder="Focused state" value="English learning">
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Card Example</div>
+                    <div class="card-demo" style="background: white; border-left: 4px solid #3B82F6;">
+                        <div class="card-title" style="color: #1F2937;">The Great Gatsby</div>
+                        <div class="card-text">A classic novel about the American Dream. Level: Intermediate • 15 min read</div>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Alerts</div>
+                    <div class="alert" style="background: #DCFCE7; color: #166534;">
+                        <span class="alert-icon">✓</span> Word added to vocabulary!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THEME 2: CREATIVE ENERGY -->
+        <div class="theme-card" style="--primary: #EC4899; --secondary: #F59E0B;">
+            <div class="theme-header">
+                <div class="theme-name" style="color: #EC4899;">2. Creative Energy</div>
+                <div class="theme-personality">Vibrant • Inspiring • Playful</div>
+                <div class="theme-description">Best for: Motivated learners who want excitement and inspiration in every interaction</div>
+            </div>
+
+            <div class="color-palette">
+                <div class="palette-section">
+                    <div class="palette-label">Primary Colors</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #EC4899;">
+                            <div class="color-label">Primary<br><span class="color-hex">#EC4899</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #F59E0B;">
+                            <div class="color-label">Secondary<br><span class="color-hex">#F59E0B</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #8B5CF6;">
+                            <div class="color-label">Accent<br><span class="color-hex">#8B5CF6</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-section">
+                    <div class="palette-label">Semantic Colors</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #10B981;">
+                            <div class="color-label">Success<br><span class="color-hex">#10B981</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #F59E0B;">
+                            <div class="color-label">Warning<br><span class="color-hex">#F59E0B</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #EF4444;">
+                            <div class="color-label">Error<br><span class="color-hex">#EF4444</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-section">
+                    <div class="palette-label">Neutral Scale</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #FFF7ED;">
+                            <div class="color-label">BG<br><span class="color-hex">#FFF7ED</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #FED7AA;">
+                            <div class="color-label">Border<br><span class="color-hex">#FED7AA</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #78716C;">
+                            <div class="color-label">Text Sec<br><span class="color-hex">#78716C</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #292524;">
+                            <div class="color-label">Text<br><span class="color-hex">#292524</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="components-demo">
+                <div class="demo-section">
+                    <div class="demo-label">Buttons</div>
+                    <div class="button-group">
+                        <button class="btn" style="background: linear-gradient(135deg, #EC4899 0%, #F59E0B 100%); color: white;">Start Reading</button>
+                        <button class="btn" style="background: white; color: #EC4899; border: 2px solid #EC4899;">Browse Books</button>
+                        <button class="btn" style="background: #FED7AA; color: #78716C;">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Input Field</div>
+                    <div class="input-demo">
+                        <input class="input-field" style="border-color: #FED7AA;" type="text" placeholder="Search for books...">
+                        <input class="input-field" style="border-color: #EC4899; background: #FCE7F3;" type="text" placeholder="Focused state" value="English learning">
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Card Example</div>
+                    <div class="card-demo" style="background: linear-gradient(135deg, #FDF4FF 0%, #FFF7ED 100%); border-left: 4px solid #EC4899;">
+                        <div class="card-title" style="color: #292524;">The Great Gatsby</div>
+                        <div class="card-text">A classic novel about the American Dream. Level: Intermediate • 15 min read</div>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Alerts</div>
+                    <div class="alert" style="background: #DCFCE7; color: #166534;">
+                        <span class="alert-icon">🎉</span> Word added to vocabulary!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THEME 3: CONFIDENT SCHOLAR -->
+        <div class="theme-card" style="--primary: #0F172A; --secondary: #10B981;">
+            <div class="theme-header">
+                <div class="theme-name" style="color: #0F172A;">3. Confident Scholar</div>
+                <div class="theme-personality">Sophisticated • Premium • Intelligent</div>
+                <div class="theme-description">Best for: Serious learners who want a premium, professional learning environment</div>
+            </div>
+
+            <div class="color-palette">
+                <div class="palette-section">
+                    <div class="palette-label">Primary Colors</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #0F172A;">
+                            <div class="color-label" style="color: white;">Primary<br><span class="color-hex" style="color: rgba(255,255,255,0.8);">#0F172A</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #10B981;">
+                            <div class="color-label">Secondary<br><span class="color-hex">#10B981</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #F59E0B;">
+                            <div class="color-label">Accent<br><span class="color-hex">#F59E0B</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-section">
+                    <div class="palette-label">Semantic Colors</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #10B981;">
+                            <div class="color-label">Success<br><span class="color-hex">#10B981</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #F59E0B;">
+                            <div class="color-label">Warning<br><span class="color-hex">#F59E0B</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #DC2626;">
+                            <div class="color-label">Error<br><span class="color-hex">#DC2626</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-section">
+                    <div class="palette-label">Neutral Scale</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #F8FAFC;">
+                            <div class="color-label">BG<br><span class="color-hex">#F8FAFC</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #CBD5E1;">
+                            <div class="color-label">Border<br><span class="color-hex">#CBD5E1</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #64748B;">
+                            <div class="color-label">Text Sec<br><span class="color-hex">#64748B</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #0F172A;">
+                            <div class="color-label" style="color: white;">Text<br><span class="color-hex" style="color: rgba(255,255,255,0.8);">#0F172A</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="components-demo">
+                <div class="demo-section">
+                    <div class="demo-label">Buttons</div>
+                    <div class="button-group">
+                        <button class="btn" style="background: #0F172A; color: white;">Start Reading</button>
+                        <button class="btn" style="background: #10B981; color: white;">Browse Books</button>
+                        <button class="btn" style="background: #F1F5F9; color: #64748B;">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Input Field</div>
+                    <div class="input-demo">
+                        <input class="input-field" style="border-color: #CBD5E1;" type="text" placeholder="Search for books...">
+                        <input class="input-field" style="border-color: #0F172A; background: #F8FAFC;" type="text" placeholder="Focused state" value="English learning">
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Card Example</div>
+                    <div class="card-demo" style="background: #0F172A; color: white; border-left: 4px solid #10B981;">
+                        <div class="card-title">The Great Gatsby</div>
+                        <div class="card-text" style="color: #94A3B8;">A classic novel about the American Dream. Level: Intermediate • 15 min read</div>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Alerts</div>
+                    <div class="alert" style="background: #D1FAE5; color: #065F46;">
+                        <span class="alert-icon">✓</span> Word added to vocabulary!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- THEME 4: GENTLE DELIGHT -->
+        <div class="theme-card" style="--primary: #06B6D4; --secondary: #A78BFA;">
+            <div class="theme-header">
+                <div class="theme-name" style="color: #06B6D4;">4. Gentle Delight</div>
+                <div class="theme-personality">Friendly • Approachable • Joyful</div>
+                <div class="theme-description">Best for: Learners who want a warm, encouraging, non-intimidating learning experience</div>
+            </div>
+
+            <div class="color-palette">
+                <div class="palette-section">
+                    <div class="palette-label">Primary Colors</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #06B6D4;">
+                            <div class="color-label">Primary<br><span class="color-hex">#06B6D4</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #A78BFA;">
+                            <div class="color-label">Secondary<br><span class="color-hex">#A78BFA</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #FB923C;">
+                            <div class="color-label">Accent<br><span class="color-hex">#FB923C</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-section">
+                    <div class="palette-label">Semantic Colors</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #34D399;">
+                            <div class="color-label">Success<br><span class="color-hex">#34D399</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #FBBF24;">
+                            <div class="color-label">Warning<br><span class="color-hex">#FBBF24</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #F87171;">
+                            <div class="color-label">Error<br><span class="color-hex">#F87171</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-section">
+                    <div class="palette-label">Neutral Scale</div>
+                    <div class="color-row">
+                        <div class="color-swatch" style="background: #FEFCE8;">
+                            <div class="color-label">BG<br><span class="color-hex">#FEFCE8</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #E0E7FF;">
+                            <div class="color-label">Border<br><span class="color-hex">#E0E7FF</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #6B7280;">
+                            <div class="color-label">Text Sec<br><span class="color-hex">#6B7280</span></div>
+                        </div>
+                        <div class="color-swatch" style="background: #374151;">
+                            <div class="color-label">Text<br><span class="color-hex">#374151</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="components-demo">
+                <div class="demo-section">
+                    <div class="demo-label">Buttons</div>
+                    <div class="button-group">
+                        <button class="btn" style="background: linear-gradient(135deg, #06B6D4 0%, #A78BFA 100%); color: white;">Start Reading</button>
+                        <button class="btn" style="background: white; color: #06B6D4; border: 2px solid #06B6D4;">Browse Books</button>
+                        <button class="btn" style="background: #E0E7FF; color: #6B7280;">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Input Field</div>
+                    <div class="input-demo">
+                        <input class="input-field" style="border-color: #E0E7FF; background: #FEFCE8;" type="text" placeholder="Search for books...">
+                        <input class="input-field" style="border-color: #06B6D4; background: #CFFAFE;" type="text" placeholder="Focused state" value="English learning">
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Card Example</div>
+                    <div class="card-demo" style="background: linear-gradient(135deg, #E0F2FE 0%, #EDE9FE 100%); border-left: 4px solid #A78BFA;">
+                        <div class="card-title" style="color: #374151;">The Great Gatsby</div>
+                        <div class="card-text">A classic novel about the American Dream. Level: Intermediate • 15 min read</div>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <div class="demo-label">Alerts</div>
+                    <div class="alert" style="background: #D1FAE5; color: #065F46;">
+                        <span class="alert-icon">✨</span> Word added to vocabulary!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="comparison-note">
+        <h3>💡 How to Choose Your Theme</h3>
+        <p><strong>Calm Focus:</strong> Traditional education feel, builds trust through familiar blue palette. Great for professional learning.</p>
+        <p><strong>Creative Energy:</strong> Bold gradients and warm colors create excitement. Perfect for motivational, inspiring "wow" moments.</p>
+        <p><strong>Confident Scholar:</strong> Premium dark theme signals sophistication. Makes learners feel like serious scholars.</p>
+        <p><strong>Gentle Delight:</strong> Soft, friendly palette reduces learning anxiety. Approachable without being childish.</p>
+        <br>
+        <p><em>Think about which emotional response best matches your "Creative & Inspired + Confident & Smart + Delighted & Surprised" vision!</em></p>
+    </div>
+
+    <script>
+        // Copy hex code on color swatch click
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                const hex = this.querySelector('.color-hex').textContent;
+                navigator.clipboard.writeText(hex).then(() => {
+                    const originalText = this.querySelector('.color-hex').textContent;
+                    this.querySelector('.color-hex').textContent = 'Copied!';
+                    setTimeout(() => {
+                        this.querySelector('.color-hex').textContent = originalText;
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
