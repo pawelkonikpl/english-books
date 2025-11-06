@@ -3,6 +3,22 @@
     "node_modules",
     ".git",
     "__tests__",
-    "coverage"
+    "coverage",
+    "build",
+    "dist",
+    ".cache",
+    ".gradle",
+    ".idea",
+    ".vscode",
+    "android/app/build",
+    "android/build",
+    "android/.gradle",
+    "ios/build",
+    "ios/Pods",
+    "ios/DerivedData",
+    "../backend",
+    "../bmad",
+    "../docs",
+    "../scripts"
   ]
 }
